@@ -10,6 +10,7 @@
     }
 
     function getUserById() {
+        alert(`ID should look like this 659569378610accc79658e7c , Dont!! use " " `)
         const userId = prompt("Enter User ID:");
         fetch(`${baseUrl}/users/${userId}`)
             .then(response => response.json())
@@ -65,6 +66,7 @@
     }
 
     function getPostById() {
+        alert(`ID should look like this 659569378610accc79658e7c , Dont!! use " " `)
         const postId = prompt("Enter Post ID:");
         fetch(`${baseUrl}/posts/${postId}`)
             .then(response => response.json())
@@ -112,6 +114,7 @@
 
     // Comment related functions
     function getAllComments() {
+        alert(`ID should look like this 659569378610accc79658e7c , Dont!! use " " `)
         const postId = prompt("Enter Post ID for comments:");
         fetch(`${baseUrl}/posts/${postId}/comments`)
             .then(response => response.json())
@@ -120,7 +123,8 @@
     }
 
     function getCommentById() {
-        // Implement if your API supports fetching a single comment by ID
+        alert("MongoDB does not support this function!");
+
     }
 
     function createNewComment() {
@@ -170,7 +174,7 @@
 
     function displayPosts(posts) {
         const postContainer = document.getElementById('post-content');
-        postContainer.innerHTML = ''; // Clear previous content
+        postContainer.innerHTML = ''; 
 
         posts.forEach(post => {
             const postElement = document.createElement('div');
