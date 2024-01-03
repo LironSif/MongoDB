@@ -94,17 +94,19 @@
     }
 
     function createNewUser() {
-        const userName = prompt("Enter User Name:");
-        const userEmail = prompt("Enter User Email:");
-        fetch(`${baseUrl}/users`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: userName, email: userEmail })
-        })
-        .then(response => response.json())
-        .then(data => updateResponse(data))
-        .catch(error => console.error('Error:', error));
-    }
+    const userName = prompt("Enter User Name:");
+    const userAddress = prompt("Enter User Address:");
+    const userEmail = prompt("Enter User Email:");
+    fetch(`${baseUrl}/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: userName, address: userAddress, email: userEmail })
+    })
+    .then(response => response.json())
+    .then(data => updateResponse(data))
+    .catch(error => console.error('Error:', error));
+}
+
 
     function updateUser() {
         const userId = prompt("Enter User ID to Update:");
@@ -236,6 +238,25 @@
 
     function updateResponse(data) {
         document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+    }
+
+    function updateResponse(data) {
+        document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+    }
+
+    function displayPosts(posts) {
+        const postContainer = document.getElementById('post-content');
+        postContainer.innerHTML = ''; // Clear previous content
+
+        posts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'post-container';
+            postElement.innerHTML = `
+                <h3>${post.title}</h3>
+                <p>${post.content}</p>
+            `;
+            postContainer.appendChild(postElement);
+        });
     }
 </script>
 
