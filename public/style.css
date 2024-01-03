@@ -1,0 +1,69 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+.header {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.description {
+    margin: 20px auto;
+    line-height: 1.6;
+    max-width: 600px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.response-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    text-align: left;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.button-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px; /* Adds space between buttons */
+    margin-bottom: 10px; /* Adds space below each group */
+}
+
+.delete-button {
+   background-color: red;
+   color: white;
+}
+
+.create-button {
+   background-color: rgb(132, 144, 212);
+   color: white;
+}
+
+.id-button {
+   background-color: rgb(34, 139, 97);
+   color: white;
+}
+
+button:hover {
+    background-color: #45a049;
+}
