@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User, Post, and Comment Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .description {
+            margin: 20px auto;
+            line-height: 1.6;
+            max-width: 600px;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .response-container {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2 class="header">User, Post & Comment Test Interface</h2>
+
+<div class="description">
+    <p>This site allows for testing of the User, Post, and Comment API. Click the buttons below to perform different operations.</p>
+</div>
+
+<!-- User related buttons -->
+<button onclick="getAllUsers()">Get All Users</button>
+<button onclick="getUserById()">Get User by ID</button>
+<button onclick="createNewUser()">Create New User</button>
+<button onclick="updateUser()">Update User</button>
+<button onclick="deleteUser()">Delete User</button>
+
+<!-- Post related buttons -->
+<button onclick="getAllPosts()">Get All Posts</button>
+<button onclick="getPostById()">Get Post by ID</button>
+<button onclick="createNewPost()">Create New Post</button>
+<button onclick="updatePost()">Update Post</button>
+<button onclick="deletePost()">Delete Post</button>
+
+<!-- Comment related buttons -->
+<button onclick="getAllComments()">Get All Comments</button>
+<button onclick="getCommentById()">Get Comment by ID</button>
+<button onclick="createNewComment()">Create New Comment</button>
+<button onclick="updateComment()">Update Comment</button>
+<button onclick="deleteComment()">Delete Comment</button>
+
+<div class="response-container" id="response"></div>
+
+<script>
+    const baseUrl = 'https://mongodb-first-app.onrender.com/api/v1';
+
+    // User related functions
+    function getAllUsers() {
+        fetch(`${baseUrl}/users`)
+            .then(response => response.json())
+            .then(data => updateResponse(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getUserById() {
+        const userId = prompt("Enter User ID:");
+        fetch(`${baseUrl}/users/${userId}`)
+            .then(response => response.json())
+            .then(data => updateResponse(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function createNewUser() {
+        const userName = prompt("Enter User Name:");
+        const userEmail = prompt("Enter User Email:");
+        fetch(`${baseUrl}/users`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: userName, email: userEmail })
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function updateUser() {
+        const userId = prompt("Enter User ID to Update:");
+        const userName = prompt("Enter New User Name:");
+        const userEmail = prompt("Enter New User Email:");
+        fetch(`${baseUrl}/users/${userId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: userName, email: userEmail })
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function deleteUser() {
+        const userId = prompt("Enter User ID to Delete:");
+        fetch(`${baseUrl}/users/${userId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Post related functions
+    function getAllPosts() {
+        fetch(`${baseUrl}/posts`)
+            .then(response => response.json())
+            .then(data => updateResponse(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getPostById() {
+        const postId = prompt("Enter Post ID:");
+        fetch(`${baseUrl}/posts/${postId}`)
+            .then(response => response.json())
+            .then(data => updateResponse(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function createNewPost() {
+        const postTitle = prompt("Enter Post Title:");
+        const postContent = prompt("Enter Post Content:");
+        const postAuthor = prompt("Enter Author ID:");
+        fetch(`${baseUrl}/posts`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: postTitle, content: postContent, author: postAuthor })
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function updatePost() {
+        const postId = prompt("Enter Post ID to Update:");
+        const postTitle = prompt("Enter New Post Title:");
+        const postContent = prompt("Enter New Post Content:");
+        fetch(`${baseUrl}/posts/${postId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: postTitle, content: postContent })
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function deletePost() {
+        const postId = prompt("Enter Post ID to Delete:");
+        fetch(`${baseUrl}/posts/${postId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Comment related functions
+    function getAllComments() {
+        const postId = prompt("Enter Post ID for comments:");
+        fetch(`${baseUrl}/posts/${postId}/comments`)
+            .then(response => response.json())
+            .then(data => updateResponse(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getCommentById() {
+        // Implement if your API supports fetching a single comment by ID
+    }
+
+    function createNewComment() {
+        const postId = prompt("Enter Post ID for the new comment:");
+        const commentText = prompt("Enter Comment Text:");
+        const commentAuthor = prompt("Enter Author ID:");
+        fetch(`${baseUrl}/posts/${postId}/comments`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: commentText, author: commentAuthor })
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function updateComment() {
+        const commentId = prompt("Enter Comment ID to Update:");
+        const commentText = prompt("Enter New Comment Text:");
+        fetch(`${baseUrl}/comments/${commentId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: commentText })
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function deleteComment() {
+        const commentId = prompt("Enter Comment ID to Delete:");
+        fetch(`${baseUrl}/comments/${commentId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => updateResponse(data))
+        .catch(error => console.error('Error:', error));
+    }
+
+    function updateResponse(data) {
+        document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+    }
+</script>
+
+</body>
+</html>

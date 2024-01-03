@@ -12,6 +12,7 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(cors())
 app.use('/api/v1/', userRoutes)
+app.use(express.static('public'));
 
 mongoose.connect(CONNECTION).then(()=> {
     console.log("DataBase is connected")
