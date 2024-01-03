@@ -7,7 +7,7 @@ Access the UserAPI interface: UserAPI Interface
 
 ## API Endpoints
 Base URL
-### https://mongodb-first-app.onrender.com/api/v1
+### https://mongodb-first-app.onrender.com/
 
 # User Endpoints
 Get All Users
